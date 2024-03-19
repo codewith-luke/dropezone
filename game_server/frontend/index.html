@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Game</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+<pre id="data">Waiting for data.</pre>
+
+<script>
+    let url = `ws://localhost:8081/ws`;
+    let ws = new WebSocket(url);
+
+    ws.addEventListener('open', () => {
+        console.log(`Connection open to Game Server`);
+    });
+
+    ws.addEventListener('message', (message) => {
+        let data = JSON.parse(message.data);
+        console.log(data);
+        document.getElementById('data').innerText = JSON.stringify(data, null, ' ');
+    });
+</script>
+</body>
+
+</html>
